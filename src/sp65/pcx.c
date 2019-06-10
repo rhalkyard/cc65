@@ -190,7 +190,11 @@ static void DumpPCXHeader (const PCXHeader* P, const char* Name)
         case 4: puts ("PCX for Windows without palette"); break;
         case 5: puts ("3.0");                             break;
     }
-    printf ("Image type:      %s\n", P->PalInfo? "color" : "grayscale");
+    printf ("Image type:      ");
+    switch (P->PalInfo) {
+        case 1: puts((P->BPP == 1) ? "black/white" : "color"); break;
+        case 2: puts ("grayscale");                            break;
+    }
     printf ("Compression:     %s\n", P->Compressed? "RLE" : "None");
     printf ("Structure:       %u planes of %u bits\n", P->Planes, P->BPP);
     printf ("Bounding box:    [%u/%u - %u/%u]\n", P->XMin, P->YMin, P->XMax, P->YMax);
@@ -207,7 +211,7 @@ static void ReadPlane (FILE* F, PCXHeader* P, unsigned char* L)
     if (P->Compressed) {
 
         /* Uncompress RLE data */
-        unsigned Remaining = P->Width;
+        unsigned Remaining = P->BytesPerPlane;
         while (Remaining) {
 
             unsigned char C;
@@ -279,7 +283,7 @@ Bitmap* ReadPCXFile (const Collection* A)
     SB_CopyStr (&B->Name, Name);
 
     /* Allocate memory for the scan line */
-    L = xmalloc (P->Width);
+    L = xmalloc (P->BytesPerPlane);
 
     /* Read the pixel data */
     Px = B->Data;
@@ -296,18 +300,21 @@ Bitmap* ReadPCXFile (const Collection* A)
                 /* Read the plane */
                 ReadPlane (F, P, L);
 
-                /* Create pixels */
-                for (X = 0, I = 0, Mask = 0x01; X < P->Width; ++Px) {
+                /* Upnpack pixels (high bit is leftmost pixel) */
+                for (I = 0, Mask = 0x80; I < P->BytesPerPlane; ++Px) {
                     Px->Index = (L[I] & Mask) != 0;
-                    if (Mask == 0x80) {
-                        Mask = 0x01;
+                    if (Mask == 0x01) {
+                        Mask = 0x80;
                         ++I;
                     } else {
-                        Mask <<= 1;
+                        Mask >>= 1;
                     }
                 }
 
             }
+
+            /* Create the monochrome palette */
+            B->Pal = NewMonochromePalette ();
         } else {
             /* One plane with 8bpp is indexed */
             for (Y = 0, Px = B->Data; Y < P->Height; ++Y) {
@@ -323,18 +330,10 @@ Bitmap* ReadPCXFile (const Collection* A)
                     Px->Index = L[X];
                 }
             }
-        }
 
-        /* One plane means we have a palette which is either part of the header
-        ** or follows.
-        */
-        if (P->PalInfo == 0) {
-
-            /* Create the monochrome palette */
-            B->Pal = NewMonochromePalette ();
-
-        } else {
-
+            /* One plane means we have a palette which is either part of the
+             * header or follows.
+             */
             unsigned      Count;
             unsigned      I;
             unsigned char Palette[256][3];
