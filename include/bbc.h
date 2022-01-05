@@ -44,7 +44,7 @@
 #  error This module may only be used when compiling for the BBC/Master Series
 #endif
 
-
+#define CLOCKS_PER_SEC 100
 
 /* Character codes */
 #define CH_DELCHR	0x32   /* delete char under the cursor */
