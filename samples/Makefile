@@ -92,6 +92,9 @@ ifneq ($(filter disk samples.%,$(MAKECMDGOALS)),)
 
   # For this one, see https://www.horus.com/~hias/atari/
   DIR2ATR ?= dir2atr
+
+  # For this one, see https://github.com/monkeyman79/dfsimage
+  DFSIMAGE ?= dfsimage
 endif
 
 DISK_c64       = samples.d64
@@ -99,6 +102,7 @@ DISK_apple2    = samples.dsk
 DISK_apple2enh = samples.dsk
 DISK_atari     = samples.atr
 DISK_atarixl   = samples.atr
+DISK_bbc       = samples.ssd
 
 # --------------------------------------------------------------------------
 # System-dependent settings
@@ -200,7 +204,11 @@ EXELIST_atmos =    \
         sieve
 
 EXELIST_bbc = \
-        notavailable
+        ascii      \
+        hello      \
+	mandelbrot \
+        sieve      \
+	tgidemo
 
 EXELIST_c64 =      \
         ascii      \
@@ -440,6 +448,19 @@ samples.atr: samples
 	@$(foreach file,$(EMD) $(MOU) $(TGI),$(ATR_WRITE_recipe))
 	$(DIR2ATR) -d -b MyDos4534 3200 $@ atr
 	@$(RMDIR) atr
+
+# DFS filenames are 7 characters; truncate them
+define SSD_WRITE_recipe
+
+$(DFSIMAGE) import --load-address=0xe00 --exec-addres=0xe00 --dfs-name $$(expr substr "$(basename $(notdir $(file)))" 1 7) $@ $(file)
+
+endef # SSD_WRITE_recipe
+
+samples.ssd: samples
+	$(DFSIMAGE) create $@
+	$(DFSIMAGE) format $@
+	$(foreach file,$(EXELIST_$(SYS)),$(SSD_WRITE_recipe))
+	$(foreach file,$(EMD) $(MOU) $(TGI),$(SSD_WRITE_recipe))
 
 # --------------------------------------------------------------------------
 # Installation rules
