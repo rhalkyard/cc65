@@ -9,6 +9,9 @@
 	.export		_gotoxy, gotoxy
 	.import		popa
 
+gotoxy:
+	jsr	popa		; Get Y
+
 _gotoxy:			; Set the cursor position
 	pha
 	lda	#31
