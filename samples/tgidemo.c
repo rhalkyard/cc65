@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <modload.h>
 #include <tgi.h>
+#include <target.h>
 
 
 
@@ -12,8 +13,8 @@
 #  define DYN_DRV       1
 #endif
 
-#define COLOR_BACK      TGI_COLOR_BLACK
-#define COLOR_FORE      TGI_COLOR_WHITE
+#define COLOR_BACK      0
+#define COLOR_FORE      1
 
 
 /*****************************************************************************/
@@ -80,15 +81,17 @@ static void DoCircles (void)
     tgi_clear ();
     tgi_line (0, 0, MaxX, MaxY);
     tgi_line (0, MaxY, MaxX, 0);
-    while (!kbhit ()) {
+    while (1) {
         Color = (Color == COLOR_FORE) ? COLOR_BACK : COLOR_FORE;
         tgi_setcolor (Color);
         for (I = 10; I <= Limit; I += 10) {
             tgi_ellipse (X, Y, I, tgi_imulround (I, AspectRatio));
+            if (kbhit ()) {
+                cgetc ();
+                return;
+            }
         }
     }
-
-    cgetc ();
 }
 
 
