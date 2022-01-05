@@ -23,8 +23,8 @@
 	.export		_exit_bits
 		
 	.include "zeropage.inc"
-	.include "oslib/os.inc"
-	.include "oslib/osbyte.inc"
+	.include "os.inc"
+	.include "osbyte.inc"
 	
 	.bss
 save_s:	.res	1		; save stack pointer before entering main

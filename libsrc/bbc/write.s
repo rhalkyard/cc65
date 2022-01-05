@@ -15,7 +15,7 @@
 	.importzp       sp, ptr1, ptr2, ptr3, tmp2, tmp1
 	
         .include	"bbc.inc"
-	.include	"oslib/os.inc"
+	.include	"os.inc"
 	.include        "fcntl.inc"
 	.include	"errno.inc"
 	.include	"fdtable.inc"

@@ -8,7 +8,7 @@
     	.export		_chlinexy, _chline
 	.import		popa, _gotoxy
 	
-	.include	"oslib/os.inc"
+	.include	"os.inc"
 	
 
 	; ??? Not tested yet

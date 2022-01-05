@@ -6,8 +6,8 @@
 
 	.export		screensize
 
-	.include	"oslib/os.inc"
-	.include	"oslib/vduvars.inc"
+	.include	"os.inc"
+	.include	"vduvars.inc"
 	
 		
 .proc   screensize

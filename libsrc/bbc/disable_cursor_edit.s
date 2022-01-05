@@ -2,8 +2,8 @@
 	.export disable_cursor_edit
 	.export restore_cursor_edit
 
-	.include "oslib/os.inc"
-	.include "oslib/osbyte.inc"
+	.include "os.inc"
+	.include "osbyte.inc"
 	
 	.bss
 oldcc:	.res 1

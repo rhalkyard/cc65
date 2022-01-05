@@ -1,7 +1,7 @@
 
 	.export init_stack
-	.include "oslib/os.inc"
-	.include "oslib/osbyte.inc"
+	.include "os.inc"
+	.include "osbyte.inc"
 	.importzp sp
 
 init_stack:

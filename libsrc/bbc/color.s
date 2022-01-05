@@ -6,8 +6,8 @@
 
  	.export		_textcolor, _bgcolor, _bordercolor, setcolors
 
-	.include	"oslib/os.inc"
-	.include	"oslib/vduvars.inc"
+	.include	"os.inc"
+	.include	"vduvars.inc"
 	.import		return1
 	.importzp	tmp1
 	.import		_revflag

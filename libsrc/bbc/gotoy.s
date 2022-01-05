@@ -4,8 +4,8 @@
 ; void __fastcall__ gotoy (unsigned char x);
 ;
 
-	.include	"oslib/os.inc"
-	.include	"oslib/vduvars.inc"
+	.include	"os.inc"
+	.include	"vduvars.inc"
 	.export		_gotoy
 	.import		_gotoxy
 	.import		_wherey

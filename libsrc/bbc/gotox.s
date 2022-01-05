@@ -4,8 +4,8 @@
 ; void gotox (unsigned char x);
 ;
 
-	.include	"oslib/os.inc"
-	.include	"oslib/vduvars.inc"
+	.include	"os.inc"
+	.include	"vduvars.inc"
 	.export		_gotox
 	.import		_gotoxy
 	.import		_wherey

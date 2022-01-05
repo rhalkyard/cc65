@@ -10,8 +10,8 @@
 	.export		_clock
 	.importzp	sreg
 	
-	.include	"oslib/os.inc"
-	.include	"oslib/osword.inc"
+	.include	"os.inc"
+	.include	"osword.inc"
 
 
 .proc	_clock

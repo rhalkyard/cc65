@@ -6,8 +6,8 @@
 
 	.export		_kbhit
 	.import		return0, return1
-	.include	"oslib/os.inc"
-	.include	"oslib/osbyte.inc"
+	.include	"os.inc"
+	.include	"osbyte.inc"
 
 .proc	_kbhit
 	lda	#osbyte_BUFFER_OP

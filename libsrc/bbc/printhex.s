@@ -1,6 +1,6 @@
 ; Dominic Beesley 26.05.2005, print a two digit hex no in A
 
-	.include "oslib/os.inc"
+	.include "os.inc"
 	.export printhex
 	
 printhex:

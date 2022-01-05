@@ -7,7 +7,7 @@
 
     	.export	       	_cputcxy, _cputc, putchar
 	.import		popa, _gotoxy
-	.include	"oslib/os.inc"
+	.include	"os.inc"
 	
 _cputcxy:
 	pha	    		; Save C

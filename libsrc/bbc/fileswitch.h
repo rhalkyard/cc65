@@ -29,11 +29,11 @@
 */
 
 #ifndef types_H
-#include "oslib/types.h"
+#include "types.h"
 #endif
 
 #ifndef os_H
-#include "oslib/os.h"
+#include "os.h"
 #endif
 
 #if defined NAMESPACE_OSLIB

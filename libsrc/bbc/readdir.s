@@ -11,8 +11,8 @@
 		.import		_set_brk_ret
 		.import		_clear_brk_ret
 
-		.include	"oslib/os.inc"
-		.include	"oslib/osgbpb.inc"
+		.include	"os.inc"
+		.include	"osgbpb.inc"
 
 ; This uses a DIR entry as below:
 ;

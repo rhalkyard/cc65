@@ -8,7 +8,7 @@
 
 /*OSLib---efficient, type-safe, transparent, extensible,
    register-safe A P I coverage of RISC O S*/
-/*Copyright © 1994 Jonathan Coxhead*/
+/*Copyright ï¿½ 1994 Jonathan Coxhead*/
 
 /* This version for cc65/ca65 (c) Dominic Beesley compiler 18 July 2005
 */
@@ -31,11 +31,11 @@
 */
 
 #ifndef types_H
-#include "oslib/types.h"
+#include "types.h"
 #endif
 
 #ifndef os_H
-#include "oslib/os.h"
+#include "os.h"
 #endif
 
 #if defined NAMESPACE_OSLIB

@@ -14,10 +14,10 @@
 	.importzp	sp, ptr1, ptr2, ptr3, tmp2, tmp1
 	.import		incsp6
 	
-	.include 	"oslib/os.inc"
+	.include 	"os.inc"
 	.include 	"fcntl.inc"
 	.include 	"errno.inc"
-	.include 	"oslib/osbyte.inc"
+	.include 	"osbyte.inc"
 	.include	"fdtable.inc"
 	
 	SIGINT		=	3

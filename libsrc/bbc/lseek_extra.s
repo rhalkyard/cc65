@@ -12,7 +12,7 @@
 	.import __fd_getflags
 	.import	_clear_brk_ret, _set_brk_ret	
 	.import	errout2
-	.include "oslib/osargs.inc"
+	.include "osargs.inc"
 	.include "fdtable.inc"
 		
 retblock:	lda ptr1 + 3

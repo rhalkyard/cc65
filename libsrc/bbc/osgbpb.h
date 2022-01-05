@@ -27,15 +27,15 @@
 */
 
 #ifndef types_H
-#include "oslib/types.h"
+#include "types.h"
 #endif
 
 #ifndef os_H
-#include "oslib/os.h"
+#include "os.h"
 #endif
 
 #ifndef fileswitch_H
-#include "oslib/fileswitch.h"
+#include "fileswitch.h"
 #endif
 
 #if defined NAMESPACE_OSLIB
@@ -449,7 +449,7 @@ extern int osgbpb_csd_entries (osgbpb_name_list *name_list,
 #endif
 
 #ifndef osgbpb32_H
-#include "oslib/osgbpb32.h"
+#include "osgbpb32.h"
 #endif
 
 #endif

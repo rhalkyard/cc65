@@ -5,8 +5,8 @@
 ;
 
 	.export	 _wherex
-	.include "oslib/os.inc"
-	.include "oslib/vduvars.inc"
+	.include "os.inc"
+	.include "vduvars.inc"
 
 _wherex:
 	lda	VDU_WKSP + VDUVAR_TEXT_CURSOR_XY + 0

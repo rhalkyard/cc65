@@ -9,8 +9,8 @@
 	.export setcursor
 	.import cursor
 	
-	.include "oslib/os.inc"
-	.include "oslib/osbyte.inc"
+	.include "os.inc"
+	.include "osbyte.inc"
 
 _cgetc:	jsr	setcursor
 	ldx	#0	; preserved

@@ -4,9 +4,9 @@
 ; void __fastcall__ gotoxy (unsigned char x, unsigned char y);
 ;
 
-	.include "oslib/os.inc"
+	.include "os.inc"
 
-	.export		_gotoxy
+	.export		_gotoxy, gotoxy
 	.import		popa
 
 _gotoxy:			; Set the cursor position

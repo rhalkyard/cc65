@@ -33,8 +33,8 @@
 	.import		printhex
 
 	.include "../../../asminc/zeropage.inc"
-	.include "../oslib/os.inc"
-	.include "../oslib/osbyte.inc"
+	.include "../os.inc"
+	.include "../osbyte.inc"
 
 	.import print0
 
