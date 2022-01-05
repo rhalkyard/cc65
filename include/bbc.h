@@ -62,7 +62,7 @@
 #define CH_RUBOUT       0x7F   /* back space (old, deprecated) */
 #define CH_DELLINE      0x00   /* delete line */
 #define CH_INSLINE      0x00   /* insert line */
-#define CH_ENTER	0x0D	/* RETURN is 13 */
+#define CH_ENTER	    0x0D   /* RETURN is 13 */
 
 /* These are actually CTRL+F? */
 #define CH_F1 	    	0x91
@@ -90,50 +90,43 @@
 
 /* color defines */
 
-/* make GTIA color value */
-//#define _gtia_mkcolor(hue,lum) (((hue) << 4) | ((lum) << 1))
-
-/* luminance values go from 0 (black) to 7 (white) */
-
-/* hue values */
-/*#define HUE_GREY        0
-#define HUE_GOLD        1
-#define HUE_GOLDORANGE  2
-#define HUE_REDORANGE   3
-#define HUE_ORANGE      4
-#define HUE_MAGENTA     5
-#define HUE_PURPLE      6
-#define HUE_BLUE        7
-#define HUE_BLUE2       8
-#define HUE_CYAN        9
-#define HUE_BLUEGREEN   10
-#define HUE_BLUEGREEN2  11
-#define HUE_GREEN       12
-#define HUE_YELLOWGREEN 13
-#define HUE_YELLOW      14
-#define HUE_YELLOWRED   15
-*/
-
-
 /* colour does work with conio for bbc */
 #define COLOR_BLACK  	       	0
 #define COLOR_WHITE  	       	7
 #define COLOR_RED    	       	1
-#define COLOR_CYAN      	6
+#define COLOR_CYAN      	    6
 #define COLOR_VIOLET 	       	5
 #define COLOR_GREEN  	        2
 #define COLOR_BLUE   	       	4
 #define COLOR_YELLOW 	       	3
+#define COLOR_FLASH(color)      (8 + color)
 
-/* ??? these are wrong!!! */
+/* BBC doesn't have these colours, map to an approximation */
+#define COLOR_ORANGE 	       	COLOR_YELLOW
+#define COLOR_BROWN  	       	COLOR_RED
+#define COLOR_LIGHTRED       	COLOR_RED
+#define COLOR_GRAY1  	       	COLOR_WHITE
+#define COLOR_GRAY2  	        COLOR_YELLOW
+#define COLOR_LIGHTGREEN     	COLOR_CYAN
+#define COLOR_LIGHTBLUE      	COLOR_CYAN
+#define COLOR_GRAY3  	       	COLOR_VIOLET
 
-#define COLOR_ORANGE 	       	8
-#define COLOR_BROWN  	       	9
-#define COLOR_LIGHTRED       	10
-#define COLOR_GRAY1  	       	11
-#define COLOR_GRAY2  	       	12
-#define COLOR_LIGHTGREEN     	13
-#define COLOR_LIGHTBLUE      	14
-#define COLOR_GRAY3  	       	15
+/* TGI colours */
+#define TGI_COLOR_BLACK  	       	COLOR_BLACK
+#define TGI_COLOR_WHITE  	       	COLOR_WHITE
+#define TGI_COLOR_RED    	       	COLOR_RED
+#define TGI_COLOR_CYAN      	    COLOR_CYAN
+#define TGI_COLOR_VIOLET 	       	COLOR_VIOLET
+#define TGI_COLOR_GREEN  	        COLOR_GREEN
+#define TGI_COLOR_BLUE   	       	COLOR_BLUE
+#define TGI_COLOR_YELLOW 	       	COLOR_YELLOW
+#define TGI_COLOR_ORANGE 	       	COLOR_ORANGE
+#define TGI_COLOR_BROWN  	       	COLOR_BROWN
+#define TGI_COLOR_LIGHTRED       	COLOR_LIGHTRED
+#define TGI_COLOR_GRAY1  	       	COLOR_GRAY1
+#define TGI_COLOR_GRAY2  	       	COLOR_GRAY2
+#define TGI_COLOR_LIGHTGREEN     	COLOR_LIGHTGREEN
+#define TGI_COLOR_LIGHTBLUE      	COLOR_LIGHTBLUE
+#define TGI_COLOR_GRAY3  	        COLOR_GRAY3
 
 #endif 
