@@ -45,6 +45,8 @@
 #  include <atari5200.h>
 #elif defined(__ATMOS__)
 #  include <atmos.h>
+#elif defined(__BBC__)
+#  include <bbc.h>
 #elif defined(__CBM__)
 #  include <cbm.h>
 #elif defined(__CREATIVISION__)
