@@ -47,14 +47,13 @@ OSWRCH := $FFEE
 ;
 ; 'mode' argument should be a valid graphics screen mode (0, 1, 2, 4, 5), or -1
 ; to build a 'universal' driver that operates in any mode using the virtual
-; 1280x1024 coordinate space.
+; 1280x1024 VDU coordinate space.
 ;
 ; The reason that both mode-specific and universal drivers are offered, is that
 ; the scaled virtual coordinate space is large enough to cause undesired results
-; with some cross-platform software. For BBC-specific programs, the generic
-; 'tgi-vdu' driver is smaller and faster, since it does not perform a redundant
-; scaling step to convert physical screen coordinates to virtual screen 
-; coordinates.
+; with some cross-platform software. For BBC-specific programs, the default
+; 'tgi-vdu' driver is smaller and faster, since it does not have to translate
+; physical screen coordinates into the virtual VDU coordinate space.
 .macro tgi_vdu_template mode
     .if (mode = 0)          ; MODE 0
         _X_RES = 640        ; 640x256
@@ -167,13 +166,24 @@ TEXT            := ptr3
 
 ERROR:          .res    1                   ; Error code
 PALETTE:        .res    _PALETTE_SIZE       ; The current palette
+.if (mode = -1)
+curmode:        .res    1                   ; Current screen mode
+.endif
 
 ; Constants and tables
 
 .rodata
 
 DEFPALETTE:     _PALETTE_DEFAULT
-PALETTESIZE     = * - DEFPALETTE
+.if (mode = -1)
+paltbl: ; palette sizes, indexed by mode, for universal driver
+                .byte   2-1     ; MODE 0 - 2 colours
+                .byte   4-1     ; MODE 1 - 4 colours
+                .byte   16-1    ; MODE 2 - 16 colours
+                .byte   0       ; MODE 3 - not actually graphics
+                .byte   2-1     ; MODE 4 - 2 colours
+                .byte   4-1     ; MODE 5 - 4 colours
+.endif
 
 .code
 
@@ -224,6 +234,7 @@ INIT:
         lda     #$A0
         ldx     #$55
         jsr     OSBYTE  ; OSBYTE $A0, $55 - read VDU workspace, offset $55 = current mode
+        sty     curmode
         cpy     #7
         beq     errexit
         cpy     #6
@@ -336,9 +347,16 @@ SETCOLOR:
 ;
 
 SETPALETTE:
-    ldy     #$ff
-:   iny
-    lda     #19
+.if (mode = -1)
+; universal driver - look up actual palette size for current mode
+    ldx     curmode
+    ldy     paltbl, x
+.else
+; mode-specific drivers can use a constant instead
+    ldy     #_PALETTE_SIZE-1
+.endif
+; load palette
+:   lda     #19
     jsr     OSWRCH
     tya
     jsr     OSWRCH
@@ -349,12 +367,13 @@ SETPALETTE:
     jsr     OSWRCH
     jsr     OSWRCH
     jsr     OSWRCH  ; VDU 19, a, b, 0, 0, 0 - set palette entry a to colour b
-    cpy     #_PALETTE_SIZE-1
-    bcc     :-
+    dey
+    bpl     :-
 
     lda     #TGI_ERR_OK
     sta     ERROR
     rts
+
 
 ; ------------------------------------------------------------------------
 ; GETPALETTE: Return the current palette in A/X. Even drivers that cannot

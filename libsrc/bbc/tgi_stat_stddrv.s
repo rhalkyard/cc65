@@ -7,8 +7,8 @@
 ;
 
         .export _tgi_static_stddrv
-        .import _bbc_tgi_4
+        .import _bbc_tgi_vdu
 
 .rodata
 
-_tgi_static_stddrv := _bbc_tgi_4
+_tgi_static_stddrv := _bbc_tgi_vdu

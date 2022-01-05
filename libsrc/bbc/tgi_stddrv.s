@@ -10,4 +10,4 @@
 
 .rodata
 
-_tgi_stddrv:    .asciiz "tgi-4"
+_tgi_stddrv:    .asciiz "tgi-vdu"
